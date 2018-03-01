@@ -137,6 +137,19 @@ function getuser()
 
 function ime_prezime()
 {
+
+}
+
+function ime_prezime_mt()
+{
+	if (isset($_SESSION["lgn"])){
+		$handle = connectwebnal();
+		$god=date("Y");
+		$cmd=mysqli_query($handle, "SELECT concat(' - ', opis) as opis from mesto_trosok where godina='$god' AND cod='".$_SESSION['lgn']."'");
+		$m_t=mysqli_fetch_row($cmd);
+		return $m_t[0];
+	}
+	return '';
 	
 }
 
