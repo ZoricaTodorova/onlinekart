@@ -1,0 +1,86 @@
+@CHARSET "UTF-8";
+.headh1
+{
+	color:#df0029;
+	border-color:green;
+	border-style:solid;
+	border-width:1px;
+	font-size:150%;
+}
+.menulink
+{
+	
+	/*float:right;*/
+}
+
+a.menulink:link {color:blue;}
+a.menulink:visited {color:#5389B0;}
+a.menulink:hover {color:#df0029;}
+a.menulink:active {color:#5389B0;}
+
+.menudiv
+{
+	background-color:#DEEBF5;
+}
+
+.parag
+{
+	color:blue;
+}
+
+.tabela
+{
+	display:none;
+}
+
+.tabelacap
+{
+	color:red;
+	font:bold;
+}
+
+.container
+{
+	float:left;
+}
+.linkot
+{
+	color:red;
+}
+#rerank_details
+{
+display: none;
+background: white;
+position: absolute;
+border: 1px solid black;
+border-radius: 6px;
+width: 305px;
+padding: 15px;
+overflow: hidden;
+text-shadow: none;
+z-index: 50;
+}
+.tabelata
+{
+	cellspacing="0";
+	cellpadding="4";
+	align="Left";
+	rules="cols";
+	border="1";
+	color:#333333;
+	border-color:#666666;
+	border-width:1px;
+	border-style:solid;
+	font-size:10px;
+	width:100%;
+	border-collapse:collapse;
+}
+
+.divot
+{
+	background-color:#D9D9D9;
+}
+
+
+
+
