@@ -60,17 +60,19 @@ echo "<h4 align=center>Испрати нарачка</h4>";
 echo "<a style='font-size: 150%;' href='naracki.php'>Назад</a><br/><br/>";
 
 $handle=connectwebnal();
-if (isset($_GET['dejnost']) && !EMPTY($_GET['dejnost'])){
+if (isset($_GET['dejnost']) && !EMPTY($_GET['dejnost']))
+	{
 	$dejnost=$_GET['dejnost'];
 	$dejnost=mysqli_real_escape_string($handle,$dejnost);
 	$_SESSION['dejnost']=$dejnost;
 // 	$res=mysqli_query($handle, "SELECT firma,firmi.opis from firmi_m_dejnosti left join firmi on firmi.cod=firmi_m_dejnosti.firma 
 // 									where firmi_m_dejnosti.dejnost like '".$dejnost."%' order by firmi.opis");
-
-	$res=mysqli_query($handle, "select distinct firmi.cod,firmi.opis from firmi 
+	$sel_fir ="select distinct firmi.cod,firmi.opis from firmi
 			inner join org_e on firmi.cod=org_e.korisnik
-			inner join firmi_m_dejnosti on firmi.cod=firmi_m_dejnosti.firma 
-			where org_E.korisnik<>'' and org_e.m_t='".getuser()."' and firmi_m_dejnosti.dejnost like '".$dejnost."%' order by firmi.opis;");
+			inner join firmi_m_dejnosti on firmi.cod=firmi_m_dejnosti.firma
+			where org_E.korisnik<>'' and org_e.m_t='".getuser()."' and firmi_m_dejnosti.dejnost like '".$dejnost."%' order by firmi.opis";
+	$res=mysqli_query($handle,$sel_fir);
+	
 ?>
 <body bgcolor='<?php echo $_SESSION['boja']; ?>'>
 <form method='GET' action='naracki_2.php'>
@@ -87,7 +89,7 @@ if (isset($_GET['dejnost']) && !EMPTY($_GET['dejnost'])){
 		if (EMPTY($firma_opis)){
 			continue;	
 		}	
-		echo "<br/><button type='submit' value='".$row[0]."' style='height: 10%; width: 30%' name='firma' id='firma' class='kopcinja'>$firma_opis</button>";
+		echo "<br/><button type='submit' value='".$row[0]."' style='height: 5%; width: 30%' name='firma' id='firma' class='kopcinja'>$firma_opis</button>";
 		//echo "<br/><br/><a style='font-size: 250%;' href='naracki_2.php?firma=".$row[0]."'>".$firma_opis[0]."</a>";
 	}
 }

@@ -24,8 +24,13 @@ echo "<h4 align=center>Испрати нарачка</h4>";
 echo "<a style='font-size: 150%;' href='izbor_naracki.php'>Назад</a><br/><br/>";
 
 $handle=connectwebnal();
-$res=mysqli_query($handle, "select * from dejnosti where length(cod)=3");
-//$rez=mysqli_fetch_array($res);
+//$res=mysqli_query($handle, "select * from dejnosti where length(cod)=3 and web_dejnost=1");
+$stmt_dej="select distinct dejnosti.cod, dejnosti.opis from dejnosti inner join firmi_m_dejnosti
+	on dejnosti.cod=firmi_m_dejnosti.dejnost
+	where length(dejnosti.cod)=3 and dejnosti.web_dejnost=1
+	and firmi_m_dejnosti.firma in (select distinct korisnik from org_e where  org_e.m_t='".getuser()."')";
+
+$res = mysqli_query($handle, $stmt_dej);
 
 ?>
 <html>
@@ -68,7 +73,7 @@ $().ready(function() {
 
 <body bgcolor='<?php echo $_SESSION['boja']; ?>'>
 <form method='GET' action='naracki_2.php'>
-<table width='30%'>
+<table style="width:30%">
 <tr>
 	<td width='68%'><input type='text' style="height:45px; width:100%; text-align:center; font-size:17px;" onClick="this.select();" name='sifra_firma' id='sifra_firma'/></td>
 	<td width='32%'><input type='submit' disabled value='Шифра на фирма' id='kopce' style='height: 45px; width: 100%'/></td>
@@ -78,9 +83,8 @@ $().ready(function() {
 
 <form method='GET' action='naracki_1.php'>
 <?php 
-
 while($row = mysqli_fetch_row($res)) {
-	echo "<br/><button type='submit' value='".$row[0]."' style='height: 10%; width: 30%' name='dejnost' id='dejnost' class='kopcinja'>$row[1]</button>";
+	echo "<br/><button type='submit' value='".$row[0]."' style='height: 5%; width: 30%' name='dejnost' id='dejnost' class='kopcinja'>$row[1]</button>";
 	//echo "<br/><br/><a style='font-size: 250%;' href='naracki_1.php?dejnost=".$row[0]."'>".$row[1]."</a>";
 }
 ?>

@@ -44,6 +44,9 @@ $handle=connectwebnal();
 <form method='POST' action='naracki_finansii.php'>
 	<input type='submit' value='Финансии' style='height: 10%; width: 30%'/>
 </form>
+<form method='POST' action='naracki_fin_firmi.php'>
+	<input type='submit' value='Финансии' style='height: 10%; width: 30%'/>
+</form>
 <form method='POST' action='naracki_lager_mat.php'>
 	<input type='submit' value='Лагер' style='height: 10%; width: 30%'/>
 </form>

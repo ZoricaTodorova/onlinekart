@@ -25,7 +25,7 @@ if (nalog()==1 && !isadmin_nalozi()){
 $m_t=$_SESSION['lgn'];
 genmenu();
 $god=date("Y");
-echo "<h4 align=center>Испрати нарачка</h4>";
+echo "<h4 align=center>Направи нарачка</h4>";
 
 $handle = connectwebnal();
 
@@ -40,32 +40,47 @@ if (isset($_GET['firma']) && !empty($_GET['firma']) && isset($_GET['sifra_firma'
 		$string=mysqli_fetch_row($cmd_string);
 		if (EMPTY($string[0])){
 			
-			$cmd_saldo=mysqli_query($handle , "select korisnik, sum(sumad) as sumad, sum(sumap) as sumap, sum(sumad-sumap) as saldo
-												 from yana join konta on yana.konto=konta.konto and yana.godina=konta.godina
-												 where yana.godina='$god'  and korisnik='$firma' and konta.help_k=1");
+						
+			$cmd_saldo=mysqli_query($handle ,"select korisnik, sum(sumad) as sumad, sum(sumap) as sumap, sum(sumad-sumap) as saldo
+					from yana join konta on yana.konto=konta.konto and yana.godina=konta.godina
+					where yana.godina='$god'  and korisnik='$firma' and konta.help_k=1");
 			$saldo=mysqli_fetch_row($cmd_saldo);
 			
 		}else{
 			
 			$aa=$string[0];
-			$bb=explode(',' , $aa);
-			$cc=count($bb);
-			
-			$res="(";
-			
-			if ($cc==1){
-				$res="(yana.konto like '".$bb[0]."%')";
-			}elseif ($cc>1){
-				for ($i=0;$i<=$cc-1;$i++){
-					$res.=" yana.konto like '".$bb[$i]."%'";
-					if ($i<$cc-1){
-						$res.=" or ";
+			if($aa !='')
+			{	
+				//print('aa prazno');
+				$res="(yana.konto like '%')";
+			}else 
+			{
+				//print('aa ne prazno');
+				$bb=explode(',' , $aa);
+				$cc=count($bb);
+				
+				$res="(";
+				
+				if ($cc==1){
+					$res="(yana.konto like '".$bb[0]."%')";
+				}elseif ($cc>1){
+					for ($i=0;$i<=$cc-1;$i++){
+						$res.=" yana.konto like '".$bb[$i]."%'";
+						if ($i<$cc-1){
+							$res.=" or ";
+						}
 					}
 				}
+				
+				$res=$res.")";
 			}
 			
-			$res=$res.")";
-			
+			//print($res);
+			//print($firma);
+			$sql_sal = "select korisnik, sum(sumad) as sumad, sum(sumap) as sumap, sum(sumad-sumap) as saldo
+			from yana where godina='$god' and korisnik='$firma' and $res";
+			//print('aa-');
+			//print($sql_sal);
 			$cmd_saldo=mysqli_query($handle, "select korisnik, sum(sumad) as sumad, sum(sumap) as sumap, sum(sumad-sumap) as saldo
 						 						from yana where godina='$god' and korisnik='$firma' and $res");
 			$saldo=mysqli_fetch_row($cmd_saldo);
@@ -173,7 +188,7 @@ if (isset($_GET['firma']) && !empty($_GET['firma']) && isset($_GET['sifra_firma'
 <?php 
 		echo "<input type='hidden' value='$firma' name='firma' id='firma'>";
 	while($row = mysqli_fetch_row($res)) {
-		echo "<br/><button type='submit' value='".$row[0]."' style='height: 10%; width: 30%' name='prod_m' id='prod_m'>$row[1]</button>";
+		echo "<br/><button type='submit' value='".$row[0]."' style='height: 5%; width: 30%' name='prod_m' id='prod_m'>$row[1]</button>";
 		//echo "<br/><br/><a style='font-size: 250%;' href='naracki_save.php?prod_m=".$row[0]."&firma=".$firma."'>".$row[1]."</a>";
 	}
 echo "</form>";
@@ -281,7 +296,7 @@ elseif (isset($_GET['sifra_firma']) && !EMPTY($_GET['sifra_firma'])){
 	
 	$res = mysqli_query($handle, "select cod,opis from org_e where korisnik=$firma AND m_t=$m_t");
 ?>
-	
+</form>	
 <body bgcolor='<?php echo $_SESSION['boja']; ?>'>
 <table>
 <tr>

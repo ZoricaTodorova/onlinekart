@@ -34,6 +34,9 @@ if (isset($_POST['glava_id']) && !EMPTY($_POST['glava_id'])){
 	$glava_id=$_POST['glava_id'];
 	$glava_id=mysqli_real_escape_string($handle,$glava_id);
 	
+	//echo "<pre>";
+	//print_r($_POST); 
+	//exit; 
 	$broj_var=count($_POST);
 	$var=($broj_var-2)/5;
 	
