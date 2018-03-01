@@ -15,7 +15,7 @@ include_once 'inc/menu.php';
 if (!logged()) redirect('index.php?rx=izbor_naracki');
 if (nalog()==0){
 	echo ("<SCRIPT LANGUAGE='JavaScript'>
-			window.alert('Немате дозвола за пристап.')
+			window.alert('ГЌГҐГ¬Г ГІГҐ Г¤Г®Г§ГўГ®Г«Г  Г§Г  ГЇГ°ГЁГ±ГІГ ГЇ.')
 			window.location.href='index.php'
 			</SCRIPT>");
 }
@@ -23,32 +23,29 @@ if (nalog()==1 && !isadmin_nalozi()){
 	$komercijalist=true;
 }
 genmenu();
-echo "<h4 align=center>Нарачки</h4>";
+echo "<h4 align=center>ГЌГ Г°Г Г·ГЄГЁ</h4>";
 
 $handle=connectwebnal();
 
-// echo "<br/><br/><a style='font-size: 250%;' href='naracki.php'>Нова нарачка</a>";
-// echo "<br/><br/><a style='font-size: 250%;' href='prikaz_naracki.php'>Стари нарачки</a>";
-// echo "<br/><br/><a style='font-size: 250%;' href='naracki_akcija.php'>Акција</a>";
-// echo "<br/><br/><a style='font-size: 250%;' href='naracki_lager_matgrupa.php'>Лагер</a>";
+// echo "<br/><br/><a style='font-size: 250%;' href='naracki.php'>ГЌГ®ГўГ  Г­Г Г°Г Г·ГЄГ </a>";
+// echo "<br/><br/><a style='font-size: 250%;' href='prikaz_naracki.php'>Г‘ГІГ Г°ГЁ Г­Г Г°Г Г·ГЄГЁ</a>";
+// echo "<br/><br/><a style='font-size: 250%;' href='naracki_akcija.php'>ГЂГЄГ¶ГЁВјГ </a>";
+// echo "<br/><br/><a style='font-size: 250%;' href='naracki_lager_matgrupa.php'>Г‹Г ГЈГҐГ°</a>";
 
 ?>
 <body bgcolor='<?php echo $_SESSION['boja']; ?>'>
 
 <form method='POST' action='naracki.php'>
-	<input type='submit' value='Нова нарачка' style='height: 10%; width: 30%'/>
+	<input type='submit' value='ГЌГ®ГўГ  Г­Г Г°Г Г·ГЄГ ' style='height: 10%; width: 30%'/>
 </form>
 <form method='POST' action='prikaz_naracki.php'>
-	<input type='submit' value='Стари нарачки' style='height: 10%; width: 30%'/>
+	<input type='submit' value='Г‘ГІГ Г°ГЁ Г­Г Г°Г Г·ГЄГЁ' style='height: 10%; width: 30%'/>
 </form>
 <form method='POST' action='naracki_finansii.php'>
-	<input type='submit' value='Финансии' style='height: 10%; width: 30%'/>
-</form>
-<form method='POST' action='naracki_fin_firmi.php'>
-	<input type='submit' value='Финансии' style='height: 10%; width: 30%'/>
+	<input type='submit' value='Г”ГЁГ­Г Г­Г±ГЁГЁ' style='height: 10%; width: 30%'/>
 </form>
 <form method='POST' action='naracki_lager_mat.php'>
-	<input type='submit' value='Лагер' style='height: 10%; width: 30%'/>
+	<input type='submit' value='Г‹Г ГЈГҐГ°' style='height: 10%; width: 30%'/>
 </form>
 </body>
 </html>
