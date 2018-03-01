@@ -1,2 +1,0 @@
-# onlinekart
-OnlineKart 
